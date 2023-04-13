@@ -1,64 +1,47 @@
 import pandas as pd
 import streamlit as st
 import base64
-from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderTimedOut
 
 def app():
-
+    
     # Set title and subtitle, additional text
-    st.title("Location Filter V2")
+    st.title("Seniority Filter V2")
     st.subheader("Property of Connected Circles")
-    st.write("""This app allows you to filter lists of profiles by country. By default, LinkedIn displays location in no set format 
-    (can be city, region, country). This means that there are millions of possible values. This app uses Google Maps API to convert 
-    the location into the name of a country. You can subsequently select the countries you want to include. You can preview the both 
-    the labeled and filtered data in the two preview windows below. You can download the data either labeled, filtered or filtered 
-    profile URLs only, all as a .csv""")
-
+    st.write("""This app allows you to filter lists of profiles by seniority. By default, it uses a set of keywords to detect and filter CXO+ level profiles 
+    (incl. partners and VPs etc.). It uses 2 sets of keywords, one that is case-sensitive and one that is case insensitive. This avoids errors such as the 
+    inclusion of 'aCCOunt managers' when searching for 'CCO'. Both sets of keywords are fully customizable and keywords can be added or removed. Keywords must 
+    be separated by a comma, whitespace will be considered a part of a keyword. You can preview the both the labeled and filtered data in the two preview 
+    windows below. You can download the data either labeled, filtered or filtered profile URLs only, all as a .csv""")
+    
+    
+    # Define the list of substrings to search for
+    # Case sensitive substring
+    default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
+    # Case insensitive substring 
+    default_substringsCI = ['Chief','Vice President', 'Vice-President', 'Partner', 'Owner', 'Founder','President','Partner']
+    
+    # Get user input for substrings
+    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS)).split(",")
+    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(default_substringsCI)).split(",")
+    
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
 
     if uploaded_file is not None:
-
         df = pd.read_csv(uploaded_file)
 
-        # define a function using GeoPy
-        @st.cache(suppress_st_warning=True)
-        def get_country(city):
-            try:
-                geolocator = Nominatim(user_agent="MksGeopyApp1")
-                location = geolocator.geocode(city, timeout=10, language='en')
-                return location.address.split(', ')[-1]
-            except (AttributeError, GeocoderTimedOut):
-                return None
+        # Create a boolean mask to identify rows where the "Title" column contains any of the case-sensitive substrings
+        maskCS = df['Title'].str.contains('|'.join(substringsCS))
 
-        # Clean the location data #####################################################
-        # Create new column and make lowercase
-        df['Location2'] = df['Location'].str.lower()
-        # Define substrings to remove
-        substr_to_remove = ["region",'greater', 'area', 'metropolitan']
-        # Apply the string replacement for each substring in the list
-        for substr in substr_to_remove:
-            df['Location2'] = df['Location2'].str.replace(substr, '')
-        # Remove any leading or trailing whitespace in the strings
-        df['Location2'] = df['Location2'].str.strip()
+        # Create a boolean mask to identify rows where the "Title" column contains any of the case-insensitive substrings
+        maskCI = df['Title'].str.contains('|'.join(substringsCI), case=False)
 
-        # Get unique country values for filtering
-        countries = df['Location2'].apply(get_country).dropna().unique()
+        # Create a new column called "CXO+" with a value of "Yes" for rows that match either condition, and "No" otherwise
+        df['CXO+'] = (maskCS | maskCI).map({True: 'Yes', False: 'No'})
 
-        # Add multiselect for country filtering
-        selected_countries = st.multiselect("Select countries to filter", countries)
-
-        # Filter data based on selected countries
-        if len(selected_countries) > 0:
-            dffiltered = df[df["Location2"].apply(get_country).isin(selected_countries)]
-        else:
-            dffiltered = df
-
-
-
-
-
+        # Filter to only include CXO+, delete CXO+ column
+        dffiltered = df[df["CXO+"]=="Yes"]
+        dffiltered = dffiltered.drop("CXO+", axis=1)
 
         # Download link for filtered data
         csv_filtered = dffiltered.to_csv(index=False)
