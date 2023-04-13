@@ -7,7 +7,7 @@ from geopy.exc import GeocoderTimedOut
 def app():
 
     # Set title and subtitle, additional text
-    st.title("Location Filter V2")
+    st.title("Location Profile Filter V2")
     st.subheader("Property of Connected Circles")
     st.write("""This app allows you to filter lists of profiles by country. By default, LinkedIn displays location in no set format 
     (can be city, region, country). This means that there are millions of possible values. This app uses Google Maps API to convert 
