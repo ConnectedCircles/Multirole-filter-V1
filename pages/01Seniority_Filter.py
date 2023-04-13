@@ -5,7 +5,7 @@ import base64
 def app():
     
     # Set title and subtitle, additional text
-    st.title("Seniority Filter V2")
+    st.title("Seniority Profile Filter V2")
     st.subheader("Property of Connected Circles")
     st.write("""This app allows you to filter lists of profiles by seniority. By default, it uses a set of keywords to detect and filter CXO+ level profiles 
     (incl. partners and VPs etc.). It uses 2 sets of keywords, one that is case-sensitive and one that is case insensitive. This avoids errors such as the 
