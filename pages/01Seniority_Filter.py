@@ -18,7 +18,7 @@ def app():
     # Case sensitive substring
     default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
     # Case insensitive substring 
-    default_substringsCI = ['Chief','Vice President', 'Vice-President', 'Partner', 'Owner', 'Founder','President','Partner']
+    default_substringsCI = ['Chief','Vice President', 'Vice-President', 'Partner ', 'Owner', 'Founder','President']
     
     # Get user input for substrings
     substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS)).split(",")
