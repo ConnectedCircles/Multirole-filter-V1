@@ -32,7 +32,7 @@ def app():
         # Define the list of columns in the dataframe
         columns_list = list(df.columns)
         # Add a dropdown menu to select a column
-        column = st.sidebar.selectbox('Select a column', options=columns_list)
+        column = st.selectbox('Select a column', options=columns_list)
         
         
 
