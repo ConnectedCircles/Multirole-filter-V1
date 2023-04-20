@@ -16,8 +16,8 @@ def app():
     
 # Create user entry fields for keywords and set defaults
     # Default substrings
-    substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
-    substringsCI = ['chief', 'vice president', 'vice-president', 'partner ', 'owner', 'founder', 'president']
+    substringsCS = ['Example_Keyword_1', 'Example_Keyword_2']
+    substringsCI = ['example_keyword_1', 'example_keyword_2']
 
     # Get user input for substrings
     input_substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(substringsCS))
