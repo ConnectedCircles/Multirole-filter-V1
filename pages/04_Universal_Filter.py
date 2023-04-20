@@ -24,6 +24,12 @@ def app():
     
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
+    
+    # Define the list of columns in the dataframe
+    columns_list = list(df.columns)
+
+# Add a dropdown menu to select a column
+column = st.sidebar.selectbox('Select a column', options=columns_list)
 
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
