@@ -43,7 +43,7 @@ def app():
         maskCI = df['Title'].str.contains('|'.join(substringsCI), case=False)
 
         # Create a new column called "CXO+" with a value of "Yes" for rows that match either condition, and "No" otherwise
-        df['CXO+'] = (maskCS | maskCI).map({True: 'Yes', False: 'No'})
+        df['Filter Criteria'] = (maskCS | maskCI).map({True: 'Yes', False: 'No'})
 
         # Filter to only include CXO+, delete CXO+ column
         dffiltered = df[df["CXO+"]=="Yes"]
