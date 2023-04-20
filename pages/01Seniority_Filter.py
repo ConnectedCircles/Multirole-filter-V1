@@ -30,9 +30,6 @@ def app():
     # Update default substrings
     substringsCS = substringsCS_list
     substringsCI = substringsCI_list
-    
-    st.write(substringsCS)
-    st.write(substringsCI)
 
     
     
