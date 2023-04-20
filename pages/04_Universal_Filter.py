@@ -42,12 +42,12 @@ def app():
         # Create a boolean mask to identify rows where the "Title" column contains any of the case-insensitive substrings
         maskCI = df['Title'].str.contains('|'.join(substringsCI), case=False)
 
-        # Create a new column called "CXO+" with a value of "Yes" for rows that match either condition, and "No" otherwise
+        # Create a new column called "Filter Criteria" with a value of "Yes" for rows that match either condition, and "No" otherwise
         df['Filter Criteria'] = (maskCS | maskCI).map({True: 'Yes', False: 'No'})
 
-        # Filter to only include CXO+, delete CXO+ column
-        dffiltered = df[df["CXO+"]=="Yes"]
-        dffiltered = dffiltered.drop("CXO+", axis=1)
+        # Filter to only include Filter Criteria = Yes, delete "Filter Criteria" column
+        dffiltered = df[df["Filter Criteria"]=="Yes"]
+        dffiltered = dffiltered.drop("Filter Criteria", axis=1)
 
         # Download link for filtered data
         csv_filtered = dffiltered.to_csv(index=False)
