@@ -39,10 +39,10 @@ def app():
         
 
         # Create a boolean mask to identify rows where the "Title" column contains any of the case-sensitive substrings
-        maskCS = df['Title'].str.contains('|'.join(substringsCS))
+        maskCS = df[Column].str.contains('|'.join(substringsCS))
 
         # Create a boolean mask to identify rows where the "Title" column contains any of the case-insensitive substrings
-        maskCI = df['Title'].str.contains('|'.join(substringsCI), case=False)
+        maskCI = df[Column].str.contains('|'.join(substringsCI), case=False)
 
         # Create a new column called "CXO+" with a value of "Yes" for rows that match either condition, and "No" otherwise
         df['CXO+'] = (maskCS | maskCI).map({True: 'Yes', False: 'No'})
