@@ -29,6 +29,9 @@ def app():
         # Add a dropdown menu to select a column
         column = st.selectbox('Select a column', options=columns_list)
         
+        st.write('You selected:', column)
+
+        
         
 
         # Create a boolean mask to identify rows where the selected column contains any of the case-sensitive substrings
