@@ -21,8 +21,8 @@ def app():
     default_substringsCI = ['chief','vice president', 'vice-president', 'partner ', 'owner', 'founder','president']
     
     # Get user input for substrings
-    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS)).split(",")
-    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(default_substringsCI)).split(",")
+    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma").split(",")
+    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma").split(",")
     
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
