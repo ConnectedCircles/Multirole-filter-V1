@@ -31,8 +31,8 @@ def app():
     substringsCS = substringsCS_list
     substringsCI = substringsCI_list
     
-    st.write(default_substringsCS)
-    st.write(default_substringsCI)
+    st.write(substringsCS)
+    st.write(substringsCI)
 
     
     
