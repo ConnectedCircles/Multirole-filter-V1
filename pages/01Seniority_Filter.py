@@ -16,20 +16,23 @@ def app():
     
 # Create user entry fields for keywords and set defaults
     # Default substrings
-    default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
-    default_substringsCI = ['chief', 'vice president', 'vice-president', 'partner ', 'owner', 'founder', 'president']
+    substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
+    substringsCI = ['chief', 'vice president', 'vice-president', 'partner ', 'owner', 'founder', 'president']
 
     # Get user input for substrings
-    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS))
-    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(default_substringsCI))
+    input_substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(substringsCS))
+    input_substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(substringsCI))
 
     # Split the substrings on comma
-    substringsCS_list = [s.strip() for s in substringsCS.split(",")]
-    substringsCI_list = [s.strip() for s in substringsCI.split(",")]
+    substringsCS_list = [s.strip() for s in input_substringsCS.split(",")]
+    substringsCI_list = [s.strip() for s in input_substringsCI.split(",")]
 
     # Update default substrings
-    default_substringsCS = substringsCS_list
-    default_substringsCI = substringsCI_list
+    substringsCS = substringsCS_list
+    substringsCI = substringsCI_list
+    
+    st.write(default_substringsCS)
+    st.write(default_substringsCI)
 
     
     
