@@ -29,6 +29,14 @@ def app():
 
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
+        
+        
+        columns_list = list(df.columns)
+        # Add a dropdown menu to select a column
+        Column = st.selectbox('Select a column', options=columns_list)
+        # Display the selected column
+        st.write('You selected:', Column)
+        
 
         # Create a boolean mask to identify rows where the "Title" column contains any of the case-sensitive substrings
         maskCS = df['Title'].str.contains('|'.join(substringsCS))
