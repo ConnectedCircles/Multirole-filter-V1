@@ -14,7 +14,7 @@ def app():
     windows below. You can download the data either labeled, filtered or filtered profile URLs only, all as a .csv""")
     
     
-
+# Create user entry fields for keywords and set defaults
     # Default substrings
     default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
     default_substringsCI = ['chief', 'vice president', 'vice-president', 'partner ', 'owner', 'founder', 'president']
@@ -31,8 +31,6 @@ def app():
     default_substringsCS = substringsCS_list
     default_substringsCI = substringsCI_list
 
-    st.write(default_substringsCS)
-    st.write(default_substringsCI)
     
     
     
