@@ -12,14 +12,10 @@ def app():
     windows below. You can download the data either labeled, filtered or filtered profile URLs only, all as a .csv""")
     
     
-    # Define the list of substrings to search for
-    # Case sensitive substring
-    default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
-    # Case insensitive substring 
-    default_substringsCI = ['chief','vice president', 'vice-president', 'partner ', 'owner', 'founder','president']
+
     
     # Get user input for substrings
-    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma")
+    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ")
     substringsCI = st.text_input("Enter case-insensitive keywords separated by comma")
     
     # File uploader
