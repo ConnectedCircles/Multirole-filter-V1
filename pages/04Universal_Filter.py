@@ -14,15 +14,25 @@ def app():
     
 
     
-     # Define the list of substrings to search for
-    # Case sensitive substring
-    default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
-    # Case insensitive substring 
-    default_substringsCI = ['Chief','Vice President', 'Vice-President', 'Partner', 'Owner', 'Founder','President','Partner']
-    
+# Create user entry fields for keywords and set defaults
+    # Default substrings
+    substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
+    substringsCI = ['chief', 'vice president', 'vice-president', 'partner ', 'owner', 'founder', 'president']
+
     # Get user input for substrings
-    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS)).split(",")
-    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(default_substringsCI)).split(",")
+    input_substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(substringsCS))
+    input_substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(substringsCI))
+
+    # Split the substrings on comma
+    substringsCS_list = [s.strip() for s in input_substringsCS.split(",")]
+    substringsCI_list = [s.strip() for s in input_substringsCI.split(",")]
+
+    # Update default substrings
+    substringsCS = substringsCS_list
+    substringsCI = substringsCI_list
+    
+    
+    
     
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
