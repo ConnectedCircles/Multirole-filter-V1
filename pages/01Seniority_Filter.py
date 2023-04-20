@@ -14,16 +14,27 @@ def app():
     windows below. You can download the data either labeled, filtered or filtered profile URLs only, all as a .csv""")
     
     
-    # Define the list of substrings to search for
-    # Case sensitive substring
-    default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
-    # Case insensitive substring 
-    default_substringsCI = ['chief','vice president', 'vice-president', 'partner ', 'owner', 'founder','president']
 
-    
+    # Default substrings
+    default_substringsCS = ['CEO', 'COO', 'CFO', 'CTO', 'CHRO', 'CMO', 'CLO', 'CSO', 'CIO', 'CTIO', 'CSIO', 'CCO', 'CDO', 'VP']
+    default_substringsCI = ['chief', 'vice president', 'vice-president', 'partner ', 'owner', 'founder', 'president']
+
     # Get user input for substrings
-    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS)).split(",")
-    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(default_substringsCI)).split(",")
+    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ".join(default_substringsCS))
+    substringsCI = st.text_input("Enter case-insensitive keywords separated by comma", ", ".join(default_substringsCI))
+
+    # Split the substrings on comma
+    substringsCS_list = [s.strip() for s in substringsCS.split(",")]
+    substringsCI_list = [s.strip() for s in substringsCI.split(",")]
+
+    # Update default substrings
+    default_substringsCS = substringsCS_list
+    default_substringsCI = substringsCI_list
+
+    st.write(default_substringsCS)
+    st.write(default_substringsCI)
+    
+    
     
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
