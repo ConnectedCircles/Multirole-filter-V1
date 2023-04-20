@@ -15,7 +15,7 @@ def app():
 
     
     # Get user input for substrings
-    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", ", ")
+    substringsCS = st.text_input("Enter case-sensitive keywords separated by comma", )
     substringsCI = st.text_input("Enter case-insensitive keywords separated by comma")
     
     # File uploader
