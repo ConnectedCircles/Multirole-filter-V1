@@ -71,6 +71,13 @@ def app():
 
 
 ##### DISPLAY OF RESULTS #####
+
+
+        # Calculate the number of rows excluding the header
+        num_rows = len(dffiltered) if uploaded_file is not None else 0
+
+        # Display the number of rows
+        st.write(f"Number of rows: {num_rows}")
         
         # Display both filtered and unfiltered data in two windows with links to download each below
         col1, col2 = st.beta_columns(2)
