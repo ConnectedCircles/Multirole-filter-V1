@@ -90,7 +90,7 @@ def app():
         # DISPLAY OF RESULTS #
         
         # Display both filtered and unfiltered data in two windows with links to download each below
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         with col1:
             st.write("Unfiltered Data")
             st.write(df)
