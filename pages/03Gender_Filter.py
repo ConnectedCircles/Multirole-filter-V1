@@ -87,7 +87,21 @@ def app():
         b64_url = base64.b64encode(csv_url.encode('utf-8')).decode()
         href_url = f'<a href="data:file/csv;base64,{b64_url}" download="profile_urls.csv">Download Profile URLs CSV File</a>'
 
-        # DISPLAY OF RESULTS #
+        ##### DISPLAY OF RESULTS #####
+
+
+        # Calculate the number of rows excluding the header for the unfiltered and filtered dataframe
+        num_rows_unfiltered = len(df) if uploaded_file is not None else 0
+
+        num_rows_filtered = len(dffiltered) if uploaded_file is not None else 0
+        # Display the number of rows
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write(f"Number of rows (original): {num_rows_unfiltered}")
+        with col2:
+            st.write(f"Number of rows (filtered): {num_rows_filtered}")
+            
+            
         
         # Display both filtered and unfiltered data in two windows with links to download each below
         col1, col2 = st.columns(2)
