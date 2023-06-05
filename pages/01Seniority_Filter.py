@@ -78,7 +78,7 @@ def app():
 
         num_rows_filtered = len(dffiltered) if uploaded_file is not None else 0
         # Display the number of rows
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)
         with col1:
             st.write(f"Number of rows (original): {num_rows_unfiltered}")
         with col2:
